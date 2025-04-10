@@ -12,11 +12,13 @@ class chart extends Controller
      */
     public function index()
     {
-       $temp =Sensor::select('temperature','created_at')->get();
-        $labels = $temp->pluck('created_at');
-        $data = $temp->pluck('temperature');
+       $val =Sensor::select('temperature','humidity','waterlevel','light','created_at')->get();
+        $labels = $val->pluck('created_at');
+        $temp = $val->pluck('temperature');
+        $humidity = $val->pluck('humidity');
+        $light = $val->pluck('light');
 
-    return view('chart', compact('labels', 'data'));
+    return view('chart', compact('labels', 'temp','humidity','light'));
     }
 
     /**
